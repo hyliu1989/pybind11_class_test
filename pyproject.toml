@@ -1,0 +1,46 @@
+[build-system]
+requires = ["scikit-build-core>=0.5.0", "pybind11", "numpy"]
+build-backend = "scikit_build_core.build"
+
+[tool.scikit-build]
+wheel.expand-macos-universal-tags = true
+
+[project]
+name = "myproj"
+version = "0.1.0"
+description="MYPROJ"
+readme = "README.md"
+authors = [{ name = "My Name", email = "me@email.com" }]
+requires-python = ">=3.10"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  # "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  # "Operating System :: OS Independent",
+]
+urls = { Homepage = "https://nodarsensor.com" }
+dependencies = [  # related to "requires" in setup.py.  See https://peps.python.org/pep-0621/#other-names-for-dependencies-optional-dependencies
+
+]
+
+# Originally called "extra-requires" but the python community decided to rename it.
+# https://peps.python.org/pep-0621/#other-names-for-dependencies-optional-dependencies
+[project.optional-dependencies]
+dev = [
+  "black",
+  "isort",
+  "mypy",
+  "pre-commit",
+  "pytest",
+  "pybind11",
+  "ipython >= 8.15.0",
+  "jupyter >= 1.0.0",
+  "notebook >= 7.0.3",
+]
+all = [
+  "myproj[dev]",
+]
