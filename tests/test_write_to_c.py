@@ -14,7 +14,7 @@ def test_write_to_c_member():
 
 def test_enclosed_class():
     a = myproj._example.TestBind()
-    b = a.enclosed
+    # b = a.enclosed
     value_to_send = 3
     enc = a.get(value_to_send)
     assert enc.c == 5 + value_to_send
@@ -28,7 +28,7 @@ def test_enclosed_class():
 
 def test_enclosed_class_2():
     a = myproj._example.TestBind()
-    b = a.enclosed
+    # b = a.enclosed
     print(a.enclosed)
     print(a.enclosed.c)
     a.get(0)
