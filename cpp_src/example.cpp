@@ -1,10 +1,15 @@
 #include <pybind11/pybind11.h>
+#include <iostream>
+
 namespace py = pybind11;
 
 
 class Enclosed {
 public:
     Enclosed() { c = 4; }
+    Enclosed(const Enclosed& other): c(other.c) {
+        std::cout << "Enclosed copy constructor invoked!" << std::endl;
+    } 
     int c;
 };
 
@@ -17,7 +22,11 @@ public:
     int some_height{20};
     int a_factor{0};
     bool use_stripes{false};
-    Enclosed& get(int level) { _enclosed.c += level; return _enclosed; };
+    Enclosed& get(int level) {
+        std::cout << "TestBind::get() returns a reference." << std::endl;
+        _enclosed.c += level;
+        return _enclosed;
+    };
     int get_a() { return a_factor; }
     Enclosed _enclosed;
 };
