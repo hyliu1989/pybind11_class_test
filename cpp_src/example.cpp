@@ -19,15 +19,11 @@ public:
     TestBind() : _enclosed() {
         _enclosed.c = 5;
     }
-    int some_height{20};
-    int a_factor{0};
-    bool use_stripes{false};
     Enclosed& get(int level) {
         std::cout << "TestBind::get() returns a reference." << std::endl;
         _enclosed.c += level;
         return _enclosed;
     };
-    int get_a() { return a_factor; }
     Enclosed _enclosed;
 };
 
@@ -37,16 +33,14 @@ PYBIND11_MODULE(_example, m) {
 
     py::class_<Enclosed>(m, "Enclosed")
         .def(py::init<>())
-        .def_readwrite("c", &Enclosed::c);
+        .def_readwrite("c", &Enclosed::c)
+        ;
 
     py::class_<TestBind>(m, "TestBind")
         .def(py::init<>())
-        .def_readwrite("some_height", &TestBind::some_height)
-        .def_readwrite("a_factor", &TestBind::a_factor)
-        .def_readwrite("use_stripes", &TestBind::use_stripes)
         .def_readonly("enclosed", &TestBind::_enclosed)
         .def("get", &TestBind::get)
-        .def("get_a", &TestBind::get_a);
+        ;
 
     m.attr("__version__") = "dev";
 }
