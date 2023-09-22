@@ -14,11 +14,36 @@ def test_write_to_c_member():
 
 def test_enclosed_class():
     a = myproj._example.TestBind()
+    b = a.enclosed
     value_to_send = 3
     enc = a.get(value_to_send)
     assert enc.c == 5 + value_to_send
+    assert enc.c == a.enclosed.c
 
     value_to_send_2 = 7
     enc2 = a.get(value_to_send_2)
     assert enc2.c == 5 + value_to_send + value_to_send_2
     assert enc.c == 5 + value_to_send + value_to_send_2
+
+
+def test_enclosed_class_2():
+    a = myproj._example.TestBind()
+    b = a.enclosed
+    print(a.enclosed)
+    print(a.enclosed.c)
+    a.get(0)
+    print(a.enclosed.c)
+    a.get(1)
+    print(a.enclosed.c)
+    print("="*10)
+    enc = a.get(6)
+    print(a.enclosed.c)
+    print(enc.c)
+    print("="*5)
+    enc2 = a.get(6)
+    print(a.enclosed.c)
+    print(enc2.c)
+    print(enc.c)
+    assert a.enclosed.c == 18
+    assert enc2.c == 18
+    assert enc.c == 18
